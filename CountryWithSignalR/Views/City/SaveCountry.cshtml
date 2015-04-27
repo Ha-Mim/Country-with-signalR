@@ -1,0 +1,111 @@
+﻿@model CountryWithSignalR.Controllers.Country
+
+
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Save Country</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/myStyle.css" rel="stylesheet" />
+    
+    
+</head>
+
+<body>
+
+    @using (Html.BeginForm("SaveCountry","City",FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Country</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.About, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextAreaFor(model=>model.About)
+                    @Html.ValidationMessageFor(model => model.About)
+                    </div>
+                </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageLocation, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="file" />
+                    @Html.ValidationMessageFor(model => model.ImageLocation)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" id="ButtonSave" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    @*<div id="FormContainer">
+        
+        @Html.Partial("ViewCountry", ViewData["Country"])
+    </div>*@
+      
+
+    <script src="~/Scripts/jquery-2.1.3.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/tinymce/tinymce.js"></script>
+    
+    <script type="text/javascript">
+        // Initialize your tinyMCE Editor with your preferred options
+        tinyMCE.init({
+            // General options
+            mode: "textareas",
+            theme: "modern",
+            // Theme options
+            theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+            theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+            theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+            theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+            theme_advanced_toolbar_location: "top",
+            theme_advanced_toolbar_align: "left",
+            theme_advanced_statusbar_location: "bottom",
+            theme_advanced_resizing: true,
+
+            // Example content CSS (should be your site CSS)
+            content_css: "css/example.css",
+        });
+    </script>
+    @*<script>
+        $(document).ready(function () {
+            $('#ButtonSave').click(function() {
+                RefreshPartial();
+            });
+        });
+
+        function RefreshPartial() {
+            $('#FormContainer').load(@ViewData["Country"]);
+        }
+    </script>*@
+    
+
+</body>
+</html>
